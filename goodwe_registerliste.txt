@@ -1,0 +1,68 @@
+Inverter_rated_power = mb:readregistervalue(35001,'uint16')
+Grid_connection_status = mb:readregistervalue(35136,"uint16")
+Total_INV_Power = mb:readregistervalue(35137,'int32')
+AC_ActivePower = mb:readregistervalue(35139,'int32')
+Total_Back_Up = mb:readregistervalue(35169,'int32')
+Total_Load_power  = mb:readregistervalue(35171,'int32')
+Ups_Load_Percent = mb:readregistervalue(35173,'uint16')
+Inverter_Internal_Temperature = mb:readregistervalue(35174,'int16')
+Inverter_Unit_Temperature = mb:readregistervalue(35175,'int16')
+Inverter_Heat_Sink_Temperature = mb:readregistervalue(35176,'int16')
+Battery1_Mode = mb:readregistervalue(35184,'uint16')
+Work_Mode = mb:readregistervalue(35187,'uint16')
+Error_Message = mb:readregistervalue(35189,"uint32")
+PV_E_Day = mb:readregistervalue(45224,'uint32')
+E_Day_Sell = mb:readregistervalue(45230,'uint16')
+E_Day_Buy = mb:readregistervalue(45231,'uint32')
+Meter_L1_Active_Power  = mb:readregistervalue(36019,'int32')
+Meter_L2_Active_Power  = mb:readregistervalue(36021,'int32')
+Meter_L3_Active_Power  = mb:readregistervalue(36023,'int32')
+Meter_Total_Active_Power  = mb:readregistervalue(36025,'int32')
+E_Total_Sell = mb:readregistervalue(45226,'uint32')
+E_Total_Buy = mb:readregistervalue(45231,'uint32')
+Battery_Mode_PV_Charge_Enable = mb:readregistervalue(45278,'uint16')
+App_Mode_Index = mb:readregistervalue(47000,'uint16')
+Start_Charge_SOC = mb:readregistervalue(47531,'uint16')
+Stop_Charge_SOC = mb:readregistervalue(47532,'uint16')
+Fast_Charge_Enable = mb:readregistervalue(47545,'uint16')
+Fast_Charge_Stop_SOC = mb:readregistervalue(47546,'uint16')
+Battery_SOC = mb:readregistervalue(37007,'uint16')
+EMSPowerMode = mb:readregistervalue(47511,'uint16')
+EMSPowerSet = mb:readregistervalue(47512,'uint16')
+--FeedPowerEnable = mb:readregistervalue(47509,'int16')
+--log(FeedPowerEnable)
+--FeedPowerPara = mb:    readregistervalue(47510,'int16')
+--log(FeedPowerPara)
+--Model_Name = mb:readregistervalue(35182,'uint32')
+--log(Model_Name)
+--Model_Name2 = mb:readregisters(35012,1)
+--log(Model_Name2)
+--Model_Name3 = mb:readregisters(35013,1)
+--log(Model_Name3)
+--Model_Name4 = mb:readregisters(35014,1)
+--log(Model_Name4)
+--wBMSBatSOC = mb:readregistervalue(47908,'uint16')
+BMS_Pack_Temperature = mb:readregistervalue(37003,'uint16')
+
+
+I'm using these registers to control battery:
+mb:writeregisters(47511, EMSPowerModeWrite) - 2 charge, 3 discharge, 1 auto/self use mode
+mb:writeregisters(47512, EMSPowerSetWrite) - charging/discharging power (in watts)
+
+double check values. These are on hex. If you try to write 0 in that register you probably get error...
+If electricity is cheap - write 2 - you gonna buy
+If price is high and you want to sell back to grid (in summer time) before sun - write 3
+If you want to use electricity from battery to supply home usage - write 1
+If you want to hold battery state then you can write 8 - so battery gonna be on standby
+
+
+35172 Total Load of Power Aktuelle Last des Stromzählers
+37007 Battery SOC Ladestand der Batterie
+35191 PV E-Total Gesamte bisher vom Wechselrichter produzierte Energie
+35193 PV E-Day Heute vom Wechselrichter produziert Energie
+35138 Total INV Power Aktuell produzierte Photovoltaik Energie :question_mark:
+35105 PV 1 Power Aktuell produzierte Photovoltaik Energie :question_mark:
+
+
+Inzwischen habe ich das "Zwangsladen" hin bekommen, es funktioniert erfolgreich mit dem Register
+47511 (EMSPowerMode) und dem EMSPowerSet (Register 47512)

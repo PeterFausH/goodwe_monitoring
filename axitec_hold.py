@@ -50,10 +50,10 @@ bot_info = "Hier deine Batteriespeicher-Info:\n"
 
 
 async def sendmessage(t):
-    bot = telegram.Bot(")
+    bot = telegram.Bot("secret")
     async with bot:
         # kommt im TWC3 Bot an
-        await bot.send_message(text=t, chat_id=)
+        await bot.send_message(text=t, chat_id=0815)
 
 
 # wurde Parameter links/rechts mit on/off angegeben ?

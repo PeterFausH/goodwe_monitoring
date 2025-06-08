@@ -2,10 +2,6 @@
 # -*- coding: utf-8 -*-
 
 # Beschreibung anpassen
-# den Speicher um 8 auf hold und um 11 auf selfuse stellen.
-# Rest in Speicher ist SoC in % von 13,5kWh -4kWh für Notstromreserve
-# vereinfacht, wenn noch 10kWh zu erwarten sind, dann auf hold gehen.
-
 
 # Axitec an GoodWe ET mit BMS-Mode steuern
 # V1.0 PFu: 10.04.2025
@@ -54,10 +50,10 @@ bot_info = "Hier deine Batteriespeicher-Info:\n"
 
 
 async def sendmessage(t):
-    bot = telegram.Bot("6991050607:AAFQmhiJ_5V_Bdwea2jvcjKsKCTDMkGYFHk")
+    bot = telegram.Bot(")
     async with bot:
         # kommt im TWC3 Bot an
-        await bot.send_message(text=t, chat_id=600227110)
+        await bot.send_message(text=t, chat_id=)
 
 
 # wurde Parameter links/rechts mit on/off angegeben ?
